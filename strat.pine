@@ -1,0 +1,22 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © jcawl
+
+//@version=4
+study("Strat", overlay=true)
+
+
+insideBar = high <= high[1] and low[1] <= low
+englufingBar = high > high[1] and low[1] > low
+onewayUp = high > high[1] and low[1] <= low
+onewayDown = high <= high[1] and low[1] > low
+
+plotchar(insideBar, title="Inside Bar", location=location.belowbar, transp=0, color=color.yellow, char="1")
+plotchar(englufingBar, title="Englulfing Bar", location=location.belowbar, transp=0, color=color.purple, char="3")
+plotchar(onewayUp, title="One Way Up Bar", location=location.belowbar, transp=0, color=color.green, char="2")
+plotchar(onewayDown, title="One Way Down Bar", location=location.belowbar, transp=0, color=color.red, char="2")
+
+volSpike = volume >= volume[1]*3
+green = close >= close[1]
+red = close <= close[1]
+plotshape(volSpike and green, title="Volume Spike", location=location.abovebar, style=shape.flag, transp=0, color=color.green)
+plotshape(volSpike and red, title="Volume Spike", location=location.abovebar, style=shape.flag, transp=0, color=color.red)
